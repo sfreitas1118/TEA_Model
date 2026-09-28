@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Na-ion Electrolyte Process Flows</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Serif:wght@500;600&display=swap">
+<style>
+:root{
+  --bg:#f5f6f8; --surface:#ffffff; --ink:#1b2230; --muted:#5b6475; --line:#d9dde5;
+  --na:#e8a317; --na-soft:#fbefd2; --na-ink:#7a5100;
+  --bg-step:#eef1f6; --fg-step:#fff8e8; --int-step:#eaf3ef;
+  --bg-edge:#8391a8; --fg-edge:#e8a317; --int-edge:#3f8f6e;
+  --energy:#b3541e; --emis:#6c4bb4; --cost:#1f6fb2; --safety:#c0392b;
+  --serif:"IBM Plex Serif",Georgia,serif; --sans:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif; --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#12161d; --surface:#1a1f29; --ink:#e7eaf0; --muted:#9aa3b4; --line:#2e3542;
+    --na:#f0b43a; --na-soft:#3a2e14; --na-ink:#f7cf7c;
+    --bg-step:#1f2531; --fg-step:#2a2416; --int-step:#172a23;
+    --bg-edge:#6d7a91; --fg-edge:#f0b43a; --int-edge:#58b08b;
+    --energy:#e58a55; --emis:#a98bee; --cost:#6aaee6; --safety:#ef7a6c;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#12161d; --surface:#1a1f29; --ink:#e7eaf0; --muted:#9aa3b4; --line:#2e3542;
+  --na:#f0b43a; --na-soft:#3a2e14; --na-ink:#f7cf7c;
+  --bg-step:#1f2531; --fg-step:#2a2416; --int-step:#172a23;
+  --bg-edge:#6d7a91; --fg-edge:#f0b43a; --int-edge:#58b08b;
+  --energy:#e58a55; --emis:#a98bee; --cost:#6aaee6; --safety:#ef7a6c;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.55;padding:0 20px}
+.wrap{max-width:1180px;margin:0 auto;padding-block:40px 64px;display:flex;flex-direction:column;gap:40px}
+h1,h2,h3{font-family:var(--serif);text-wrap:balance;margin:0;font-weight:600}
+h1{font-size:clamp(1.7rem,3.4vw,2.4rem);line-height:1.15}
+h2{font-size:1.35rem}
+h3{font-size:1.1rem}
+p{margin:0;max-width:68ch}
+.eyebrow{font-family:var(--mono);font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+header{display:flex;flex-direction:column;gap:12px}
+.dline{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:.78rem;color:var(--na-ink);background:var(--na-soft);padding:3px 10px;border-radius:4px;width:fit-content}
+.dline i{width:10px;height:10px;border-radius:50%;background:var(--na);display:block}
+.legend{display:flex;flex-wrap:wrap;gap:10px 24px;font-size:.85rem;color:var(--muted)}
+.legend span{display:inline-flex;align-items:center;gap:8px}
+.sw{width:16px;height:12px;border-radius:2px;border:1px solid;border-left-width:4px}
+.sw.bg{background:var(--bg-step);border-color:var(--bg-edge)}
+.sw.fg{background:var(--fg-step);border-color:var(--fg-edge)}
+.sw.int{background:var(--int-step);border-color:var(--int-edge)}
+.chip{font-family:var(--mono);font-size:.68rem;letter-spacing:.03em;padding:1px 6px;border-radius:3px;border:1px solid currentColor;white-space:nowrap}
+.chip.energy{color:var(--energy)} .chip.emis{color:var(--emis)} .chip.cost{color:var(--cost)} .chip.safety{color:var(--safety)}
+
+nav.jump{display:flex;flex-wrap:wrap;gap:8px}
+nav.jump a{font-family:var(--mono);font-size:.8rem;color:var(--ink);text-decoration:none;border:1px solid var(--line);background:var(--surface);padding:5px 10px;border-radius:4px}
+nav.jump a:hover,nav.jump a:focus-visible{border-color:var(--na);outline:none}
+
+.flow{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:24px;display:flex;flex-direction:column;gap:18px;scroll-margin-top:16px}
+.flow.base{border-top:3px solid var(--muted)}
+.flow-head{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 24px;align-items:baseline}
+.formula{font-family:var(--mono);font-size:.85rem;color:var(--muted)}
+.role{font-size:.9rem;color:var(--muted)}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px}
+.step{position:relative;border:1px solid var(--line);border-left:4px solid;border-radius:4px;padding:12px 14px;display:flex;flex-direction:column;gap:8px;font-size:.86rem}
+.step.bg{background:var(--bg-step);border-left-color:var(--bg-edge)}
+.step.fg{background:var(--fg-step);border-left-color:var(--fg-edge)}
+.step.int{background:var(--int-step);border-left-color:var(--int-edge)}
+.step .n{font-family:var(--mono);font-size:.7rem;color:var(--muted)}
+.step strong{font-size:.93rem;line-height:1.3}
+.step ul{margin:0;padding-left:16px;display:flex;flex-direction:column;gap:3px}
+.step .cond{font-family:var(--mono);font-size:.74rem;color:var(--muted)}
+.step .chips{display:flex;flex-wrap:wrap;gap:4px;margin-top:auto}
+.notes{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px 28px;font-size:.87rem;border-top:1px dashed var(--line);padding-top:14px}
+.notes div{display:flex;flex-direction:column;gap:3px}
+.notes b{font-family:var(--mono);font-size:.7rem;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);font-weight:500}
+.callout{background:var(--na-soft);border-radius:4px;padding:12px 14px;font-size:.86rem;display:flex;flex-direction:column;gap:4px}
+.callout .eq{font-family:var(--mono);font-size:.84rem}
+
+.tbl-wrap{overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:6px}
+table{border-collapse:collapse;width:100%;min-width:860px;font-size:.84rem}
+th,td{text-align:left;vertical-align:top;padding:10px 12px;border-bottom:1px solid var(--line)}
+thead th{font-family:var(--mono);font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:500;background:var(--bg)}
+tbody th{font-family:var(--serif);font-weight:600;font-size:.92rem;white-space:nowrap}
+tr:last-child td,tr:last-child th{border-bottom:none}
+
+.calc{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:24px;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:28px}
+@media (max-width:760px){.calc{grid-template-columns:1fr}}
+.fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.field{display:flex;flex-direction:column;gap:4px}
+.field label{font-size:.8rem;color:var(--muted)}
+.field input,.field select{font-family:var(--mono);font-size:.9rem;padding:7px 9px;border:1px solid var(--line);border-radius:4px;background:var(--bg);color:var(--ink);width:100%}
+.field input:focus-visible,.field select:focus-visible{outline:2px solid var(--na);outline-offset:1px}
+.out{display:flex;flex-direction:column;gap:12px}
+.out .row{display:flex;justify-content:space-between;align-items:baseline;gap:12px;border-bottom:1px solid var(--line);padding-bottom:8px}
+.out .row span{font-size:.85rem;color:var(--muted)}
+.out .row output{font-family:var(--mono);font-size:1.15rem;font-variant-numeric:tabular-nums}
+.out .row.key output{color:var(--na-ink);font-weight:500;font-size:1.35rem}
+.small{font-size:.8rem;color:var(--muted)}
+.eqblock{font-family:var(--mono);font-size:.8rem;color:var(--muted);background:var(--bg);border-radius:4px;padding:10px 12px;line-height:1.7}
+section{display:flex;flex-direction:column;gap:16px}
+.next ol{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:6px;max-width:80ch}
+@media (max-width:480px){.fields{grid-template-columns:1fr}.flow,.calc{padding:16px}}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+<header>
+  <span class="eyebrow">ENGG 192 · LCA / TEA foreground model · draft v1</span>
+  <h1>Na-ion electrolyte process flows</h1>
+  <p>Electrolyte-level process flows for the NaPF₆ liquid baseline and four solid or gel alternatives. Each card is one unit process. Every card lists the inputs you will need as LCI flows and TEA line items, and tags the likely hotspots. The system boundary stops at the cell. Module, pack and BMS are held identical across scenarios and dropped.</p>
+  <span class="dline"><i></i>Na D-line, 589 nm: accent marks foreground processes you model</span>
+  <div class="legend">
+    <span><i class="sw bg"></i>Background (ecoinvent / GREET / literature)</span>
+    <span><i class="sw fg"></i>Foreground synthesis &amp; processing (your model)</span>
+    <span><i class="sw int"></i>Cell integration delta vs. baseline</span>
+  </div>
+  <div class="legend">
+    <span><span class="chip energy">ENERGY</span> thermal or electricity hotspot</span>
+    <span><span class="chip emis">EMISSION</span> direct process emission</span>
+    <span><span class="chip cost">COST</span> dominant cost driver</span>
+    <span><span class="chip safety">SAFETY</span> hazard / regulatory layer</span>
+  </div>
+  <nav class="jump" aria-label="Jump to chemistry" id="jump"></nav>
+</header>
+
+<div id="flows" style="display:flex;flex-direction:column;gap:24px"></div>
+
+<section>
+  <h2>Side-by-side</h2>
+  <p class="small">Illustrative ranges from typical lab and pilot routes. Replace each one with a cited value when you build the parameter sheet.</p>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Chemistry</th><th>Peak process T</th><th>Atmosphere</th><th>Densification</th><th>Main cost driver</th><th>LCA hotspot</th><th>Research gap hook</th></tr></thead>
+      <tbody id="cmp"></tbody>
+    </table>
+  </div>
+</section>
+
+<section>
+  <h2>Electrolyte mass and cost per kWh</h2>
+  <p>This converts a film spec into the functional unit. Use it to express every chemistry per kWh of cell capacity. Thickness drives mass, and mass drives most of the cost.</p>
+  <div class="calc">
+    <div class="fields">
+      <div class="field" style="grid-column:1/-1"><label for="preset">Preset</label>
+        <select id="preset"></select></div>
+      <div class="field"><label for="t">Separator-layer thickness (µm)</label><input id="t" type="number" min="1" step="1"></div>
+      <div class="field"><label for="rho">Density (g/cm³)</label><input id="rho" type="number" min="0.1" step="0.05"></div>
+      <div class="field"><label for="q">Cathode areal capacity (mAh/cm²)</label><input id="q" type="number" min="0.1" step="0.1"></div>
+      <div class="field"><label for="v">Nominal cell voltage (V)</label><input id="v" type="number" min="0.5" step="0.05"></div>
+      <div class="field"><label for="price">Electrolyte cost ($/kg)</label><input id="price" type="number" min="0" step="1"></div>
+      <div class="field"><label for="yld">Process yield (%)</label><input id="yld" type="number" min="1" max="100" step="1"></div>
+    </div>
+    <div class="out">
+      <div class="row"><span>Separator area per kWh</span><output id="o-area">–</output></div>
+      <div class="row"><span>Electrolyte in cell per kWh</span><output id="o-mass">–</output></div>
+      <div class="row"><span>Material to produce (yield-adjusted)</span><output id="o-gross">–</output></div>
+      <div class="row key"><span>Electrolyte cost per kWh</span><output id="o-cost">–</output></div>
+      <div class="eqblock">A = 1 / (q · V)  → cm² per Wh<br>m = ρ · t · A · 1000  → g per kWh<br>m_gross = m / yield<br>cost = m_gross · $/kg</div>
+      <p class="small">Covers the separator layer only. Catholyte fraction inside composite cathodes is extra and matters most for sulfides and halides. Preset prices and thicknesses are placeholders for illustration, not cited values.</p>
+    </div>
+  </div>
+</section>
+
+<section class="next">
+  <h2>What this feeds next</h2>
+  <ol>
+    <li>Turn each foreground card into one row block in the Excel TEA skeleton: inputs (kg per kg product), utilities (kWh, m³ gas), yield, equipment, labor.</li>
+    <li>The same rows become foreground processes in OpenLCA. Link each background card to its ecoinvent activity, or flag it as a proxy where none exists (Na₂S, P₂S₅, YCl₃, PPC).</li>
+    <li>Sulfide H₂S bounds come straight from the stoichiometry box, scaled by the per-kWh mass above.</li>
+    <li>The salt row in the GPE flow is where the NaPF₆ vs. NaTFSI vs. NaClO₄ regulatory cost layer attaches.</li>
+  </ol>
+</section>
+</div>
+
+<script>
+const FLOWS=[
+ {id:"liquid",base:true,name:"NaPF₆ liquid (baseline)",formula:"1 M NaPF₆ in EC:PC (± DMC), FEC additive",role:"Reference case. Also the electrolyte in the NaEV deck.",
+  steps:[
+   {k:"bg",t:"Salt synthesis",in:["NaF or NaCl","PCl₅ (from P + Cl₂)","Anhydrous HF"],c:"Low T, HF medium, recrystallize and dry",h:["safety","cost"]},
+   {k:"bg",t:"Solvent production",in:["EC: ethylene oxide + CO₂","PC: propylene oxide + CO₂","DMC"],c:"Distill to battery grade, <20 ppm H₂O",h:["energy"]},
+   {k:"fg",t:"Formulation",in:["Dissolve salt and additives","Filter, QC for H₂O and HF"],c:"Dry room or Ar glovebox",h:["energy"]},
+   {k:"int",t:"Cell integration",in:["Polyolefin separator","Electrolyte fill (≈ g/Ah)","Wetting, formation, degas"],c:"Dry room, dew point ≈ −40 °C",h:["energy","cost"]}],
+  notes:{"Fluorine / PFAS":"NaPF₆ hydrolysis gives HF, POF₃. This is the PFAS regulatory layer you cost against.","Carry into TEA":"Salt $/kg, solvent $/kg, fill g/Ah, separator $/m², dry-room kWh/m²·yr.","End of life":"Electrolyte recovery rarely credited. Assume incineration with HF scrubbing."}},
+ {id:"oxide",name:"Oxide · NASICON",formula:"Na₃Zr₂Si₂PO₁₂ (NZSP)",role:"Air-stable ceramic. Energy intensive to sinter.",
+  steps:[
+   {k:"bg",t:"Precursors",in:["Na₂CO₃","ZrO₂","SiO₂","NH₄H₂PO₄"],c:"Sol-gel alt: Zr alkoxide + TEOS",h:["cost"]},
+   {k:"fg",t:"Mix and calcine",in:["Ball mill in ethanol","Dry"],c:"≈ 900–1100 °C, 10–12 h",h:["energy","emis"]},
+   {k:"fg",t:"Form and sinter",in:["Re-mill, tape cast or press","Excess Na to offset loss"],c:"≈ 1150–1250 °C, several h",h:["energy","cost"]},
+   {k:"int",t:"Cell integration",in:["Thin sheet or pellet","Interlayer to fix wetting","Stack pressure fixtures"],c:"Electrolyte tolerates ambient air",h:["cost"]}],
+  notes:{"Direct emissions":"CO₂ from Na₂CO₃ decomposition, NH₃ + H₂O from NH₄H₂PO₄. Stoichiometric, easy to put in the LCI.","Carry into TEA":"Kiln kWh/kg, sinter yield (cracking, Na loss), sheet thickness, ZrO₂ price.","Tie to your lab":"Same NZSP route supplies the filler in the PEO-PPC-NASICON composite at a lower loading."}},
+ {id:"sulfide",name:"Sulfide",formula:"Na₃PS₄ (also Na₃SbS₄, Na₁₁Sn₂PS₁₂)",role:"Soft, cold-pressable, highly conductive. Moisture sensitive.",
+  steps:[
+   {k:"bg",t:"Precursors",in:["Na₂S (carbothermal Na₂SO₄ reduction)","P₂S₅ (P₄ + S)"],c:"Weak ecoinvent coverage: build proxies",h:["energy","cost"]},
+   {k:"fg",t:"Synthesis",in:["High-energy ball milling, or","Solution route (e.g. in a polar solvent)"],c:"Ar atmosphere, anneal ≈ 250–300 °C",h:["energy","safety"]},
+   {k:"fg",t:"Densify and cast",in:["Slurry in nonpolar solvent + binder","Cold press"],c:"No high-T sinter. Dry room / Ar",h:["energy","safety"]},
+   {k:"int",t:"Cell integration",in:["High stack pressure","H₂S monitoring, scrubbers","Moisture barrier packaging"],c:"Dew point well below Li-ion dry rooms",h:["safety","cost"]}],
+  notes:{"H₂S exposure points":"Manufacturing leaks, cell breach in use, and recycling or landfill at end of life. Model each as a bounded scenario.","Carry into TEA":"Milling kWh/kg, Ar consumption, dry-room upgrade CapEx, scrubber CapEx and reagent.","Data gap":"Na₂S and P₂S₅ at battery grade need proxy inventories. State the proxy clearly."},
+  callout:{t:"Gap 2 bound: worst-case H₂S from full hydrolysis",eq:"Na₃PS₄ + 4 H₂O → Na₃PO₄ + 4 H₂S",x:"228.2 g Na₃PS₄ → 136.3 g H₂S, so at most ≈ 0.60 g H₂S per g electrolyte. Multiply by the per-kWh mass below for an upper bound, then apply USEtox factors."}},
+ {id:"halide",name:"Halide",formula:"Na₃YCl₆, Na₂ZrCl₆ family",role:"Oxidation stable, good as catholyte. Moderate moisture sensitivity.",
+  steps:[
+   {k:"bg",t:"Precursors",in:["NaCl","YCl₃ or ZrCl₄ (anhydrous)"],c:"ZrCl₄ from zircon carbochlorination",h:["cost","emis"]},
+   {k:"fg",t:"Synthesis",in:["Ball milling, or","Sealed-ampoule anneal"],c:"≈ 400–550 °C, inert",h:["energy"]},
+   {k:"fg",t:"Densify",in:["Cold press","Often used mixed into cathode"],c:"Dry atmosphere",h:["safety"]},
+   {k:"int",t:"Cell integration",in:["Catholyte fraction in cathode","Paired with a separator-layer SE"],c:"Stack pressure",h:["cost"]}],
+  notes:{"Hydrolysis":"Moisture exposure can release HCl. A smaller analog of the sulfide H₂S question.","Carry into TEA":"Y is the cost and supply-risk swing. Zr-based variants trade cost for conductivity.","Scope note":"Treat as a sensitivity case unless you find credible Na-halide pilot data."}},
+ {id:"gpe",name:"Polymer / GPE · composite",formula:"PEO–PPC + Na salt + NASICON filler",role:"Your lab's system. Roll-to-roll compatible, low process T.",
+  steps:[
+   {k:"bg",t:"Polymers and salt",in:["PEO (from ethylene oxide)","PPC (CO₂ + propylene oxide)","Na salt: NaTFSI, NaFSI, NaClO₄ or NaPF₆"],c:"PPC embeds CO₂, so check allocation",h:["cost","safety"]},
+   {k:"bg",t:"Ceramic filler",in:["NZSP from the oxide flow"],c:"Filler wt% scales that flow's burdens",h:["energy"]},
+   {k:"fg",t:"Cast or extrude",in:["Solution cast (acetonitrile, DMF) or","Solvent-free hot press / extrusion"],c:"≈ 60–120 °C",h:["energy","emis"]},
+   {k:"fg",t:"Dry and condition",in:["Vacuum dry","Solvent recovery"],c:"GPE variant: liquid uptake or in-situ polymerization",h:["energy"]},
+   {k:"int",t:"Cell integration",in:["Laminate film","Mild heat and pressure"],c:"Closest to existing Li-ion lines",h:["cost"]}],
+  notes:{"Salt choice moves PFAS risk":"NaTFSI and NaFSI are fluorinated. Only NaClO₄ or other non-fluorinated salts fully avoid the PFAS layer, and NaClO₄ has its own oxidizer hazard.","Carry into TEA":"Casting solvent use and recovery rate, film thickness, filler loading, line speed.","LCA hotspot":"Solvent recovery rate often dominates. Run it as a sensitivity parameter (e.g. 90–99%)."}}
+];
+const CMP=[
+ ["NaPF₆ liquid","≈ ambient (salt synth low T)","Dry room","n/a","Salt + separator","HF route, solvent production","Gap 3: PFAS cost layer"],
+ ["Oxide NASICON","≈ 1150–1250 °C","Ambient air","High-T sinter","Kiln energy, yield, thickness","Sintering electricity or gas","Gap 1: first scaled TEA"],
+ ["Sulfide","≈ 250–300 °C","Ar / very dry","Cold press","Precursors, dry-room CapEx","Na₂S, P₂S₅ production; H₂S","Gap 2: H₂S bounds"],
+ ["Halide","≈ 400–550 °C","Inert / dry","Cold press","YCl₃ or ZrCl₄","Chlorination, milling","Gap 1: sensitivity case"],
+ ["Polymer / GPE","≈ 60–120 °C","Dry room","None (cast film)","Salt, solvent recovery","Casting solvent, salt","Gaps 1 and 3"]
+];
+const PRESETS={
+ oxide:{label:"Oxide NZSP sheet",t:100,rho:3.2,q:3,v:3.2,price:50,yld:85},
+ sulfide:{label:"Sulfide Na₃PS₄ layer",t:50,rho:1.9,q:3,v:3.2,price:80,yld:90},
+ gpe:{label:"PEO–PPC–NZSP composite film",t:50,rho:1.3,q:2,v:3.2,price:30,yld:95},
+ custom:{label:"Custom",t:30,rho:1.5,q:3,v:3.2,price:40,yld:90}
+};
+const tagLabel={energy:"ENERGY",emis:"EMISSION",cost:"COST",safety:"SAFETY"};
+const esc=s=>s;
+const flowsEl=document.getElementById('flows'), jump=document.getElementById('jump');
+FLOWS.forEach(f=>{
+  const a=document.createElement('a'); a.href='#'+f.id; a.textContent=f.name; jump.appendChild(a);
+  const steps=f.steps.map((s,i)=>`<div class="step ${s.k}"><span class="n">${f.id.toUpperCase()}-${i+1}</span><strong>${s.t}</strong><ul>${s.in.map(x=>`<li>${x}</li>`).join('')}</ul><span class="cond">${s.c}</span><div class="chips">${s.h.map(h=>`<span class="chip ${h}">${tagLabel[h]}</span>`).join('')}</div></div>`).join('');
+  const notes=Object.entries(f.notes).map(([k,v])=>`<div><b>${k}</b><span>${v}</span></div>`).join('');
+  const call=f.callout?`<div class="callout"><strong>${f.callout.t}</strong><span class="eq">${f.callout.eq}</span><span>${f.callout.x}</span></div>`:'';
+  const el=document.createElement('article'); el.className='flow'+(f.base?' base':''); el.id=f.id;
+  el.innerHTML=`<div class="flow-head"><div style="display:flex;flex-direction:column;gap:4px"><h3>${f.name}</h3><span class="formula">${f.formula}</span></div><span class="role">${f.role}</span></div><div class="steps">${steps}</div>${call}<div class="notes">${notes}</div>`;
+  flowsEl.appendChild(el);
+});
+document.getElementById('cmp').innerHTML=CMP.map(r=>`<tr><th scope="row">${r[0]}</th>${r.slice(1).map(c=>`<td>${c}</td>`).join('')}</tr>`).join('');
+
+const sel=document.getElementById('preset'); const ids=['t','rho','q','v','price','yld'];
+Object.entries(PRESETS).forEach(([k,p])=>{const o=document.createElement('option');o.value=k;o.textContent=p.label;sel.appendChild(o)});
+function load(k){const p=PRESETS[k];ids.forEach(i=>document.getElementById(i).value=p[i]);calc()}
+const fmt=(n,d)=>isFinite(n)?n.toLocaleString(undefined,{maximumFractionDigits:d,minimumFractionDigits:d}):'–';
+function calc(){
+  const [t,rho,q,v,price,yld]=ids.map(i=>parseFloat(document.getElementById(i).value));
+  const areaCm2PerWh=1/(q*v/1000);            // q mAh/cm² * V = mWh/cm²
+  const areaM2=areaCm2PerWh*1000/1e4;          // per kWh
+  const massG=rho*(t*1e-4)*areaCm2PerWh*1000;  // g per kWh
+  const gross=massG/(yld/100);
+  document.getElementById('o-area').textContent=fmt(areaM2,1)+' m²';
+  document.getElementById('o-mass').textContent=fmt(massG/1000,2)+' kg';
+  document.getElementById('o-gross').textContent=fmt(gross/1000,2)+' kg';
+  document.getElementById('o-cost').textContent='$'+fmt(gross/1000*price,0)+' /kWh';
+}
+sel.addEventListener('change',()=>load(sel.value));
+ids.forEach(i=>document.getElementById(i).addEventListener('input',()=>{sel.value='custom';calc()}));
+load('oxide');
+</script>
+</body>
+</html>
