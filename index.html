@@ -112,11 +112,11 @@ section{display:flex;flex-direction:column;gap:16px}
 <div class="wrap">
 <header>
   <h1>Na-ion electrolyte process flows</h1>
-  <p>Electrolyte-level process flows for the NaPF₆ liquid baseline and four solid or gel alternatives. Each card is one unit process. Every card lists the inputs you will need as LCI flows and TEA line items, and tags the likely hotspots. The system boundary stops at the cell. Module, pack and BMS are held identical across scenarios and dropped.</p>
+  <p>Electrolyte-level process flows for the NaPF₆ liquid baseline and four solid or gel alternatives. Each card is one unit process. Every card lists the inputs needed as LCI flows and TEA line items, and tags the likely hotspots. The system boundary stops at the cell. Module, pack and BMS are held identical across scenarios and dropped.</p>
   <span class="dline"><i></i>Na D-line, 589 nm: accent marks foreground processes you model</span>
   <div class="legend">
     <span><i class="sw bg"></i>Background (ecoinvent / GREET / literature)</span>
-    <span><i class="sw fg"></i>Foreground synthesis &amp; processing (your model)</span>
+    <span><i class="sw fg"></i>Foreground synthesis &amp; processing (our model)</span>
     <span><i class="sw int"></i>Cell integration delta vs. baseline</span>
   </div>
   <div class="legend">
@@ -200,14 +200,14 @@ const FLOWS=[
    {k:"fg",t:"Mix and calcine",in:["Ball mill in ethanol","Dry"],c:"≈ 900–1100 °C, 10–12 h",h:["energy","emis"]},
    {k:"fg",t:"Form and sinter",in:["Re-mill, tape cast or press","Excess Na to offset loss"],c:"≈ 1150–1250 °C, several h",h:["energy","cost"]},
    {k:"int",t:"Cell integration",in:["Thin sheet or pellet","Interlayer to fix wetting","Stack pressure fixtures"],c:"Electrolyte tolerates ambient air",h:["cost"]}],
-  notes:{"Direct emissions":"CO₂ from Na₂CO₃ decomposition, NH₃ + H₂O from NH₄H₂PO₄. Stoichiometric, easy to put in the LCI.","Carry into TEA":"Kiln kWh/kg, sinter yield (cracking, Na loss), sheet thickness, ZrO₂ price.","Tie to your lab":"Same NZSP route supplies the filler in the PEO-PPC-NASICON composite at a lower loading."}},
+  notes:{"Direct emissions":"CO₂ from Na₂CO₃ decomposition, NH₃ + H₂O from NH₄H₂PO₄. Stoichiometric, easy to put in the LCI.","Carry into TEA":"Kiln kWh/kg, sinter yield (cracking, Na loss), sheet thickness, ZrO₂ price.","Tie to our lab synthesis":"Same NZSP route supplies the filler in the PEO-PPC-NASICON composite at a lower loading."}},
  {id:"sulfide",name:"Sulfide",formula:"Na₃PS₄ (also Na₃SbS₄, Na₁₁Sn₂PS₁₂)",role:"Soft, cold-pressable, highly conductive. Moisture sensitive.",
   steps:[
    {k:"bg",t:"Precursors",in:["Na₂S (carbothermal Na₂SO₄ reduction)","P₂S₅ (P₄ + S)"],c:"Weak ecoinvent coverage: build proxies",h:["energy","cost"]},
    {k:"fg",t:"Synthesis",in:["High-energy ball milling, or","Solution route (e.g. in a polar solvent)"],c:"Ar atmosphere, anneal ≈ 250–300 °C",h:["energy","safety"]},
    {k:"fg",t:"Densify and cast",in:["Slurry in nonpolar solvent + binder","Cold press"],c:"No high-T sinter. Dry room / Ar",h:["energy","safety"]},
    {k:"int",t:"Cell integration",in:["High stack pressure","H₂S monitoring, scrubbers","Moisture barrier packaging"],c:"Dew point well below Li-ion dry rooms",h:["safety","cost"]}],
-  notes:{"H₂S exposure points":"Manufacturing leaks, cell breach in use, and recycling or landfill at end of life. Model each as a bounded scenario.","Carry into TEA":"Milling kWh/kg, Ar consumption, dry-room upgrade CapEx, scrubber CapEx and reagent.","Data gap":"Na₂S and P₂S₅ at battery grade need proxy inventories. State the proxy clearly."},
+  notes:{"H₂S exposure points":"Manufacturing leaks, cell breach in use, and recycling or landfill at end of life. Model each as a bounded scenario.","Carry into TEA":"Milling kWh/kg, Ar consumption, dry-room upgrade CapEx, scrubber CapEx and reagent.","Data gap":"Na₂S and P₂S₅ at battery grade need proxy inventories."},
   callout:{t:"Worst-case H₂S from full hydrolysis",eq:"Na₃PS₄ + 4 H₂O → Na₃PO₄ + 4 H₂S",x:"228.2 g Na₃PS₄ → 136.3 g H₂S, so at most ≈ 0.60 g H₂S per g electrolyte. Multiply by the per-kWh mass below for an upper bound, then apply USEtox factors."}},
  {id:"halide",name:"Halide",formula:"Na₃YCl₆, Na₂ZrCl₆ family",role:"Oxidation stable, good as catholyte. Moderate moisture sensitivity.",
   steps:[
@@ -216,7 +216,7 @@ const FLOWS=[
    {k:"fg",t:"Densify",in:["Cold press","Often used mixed into cathode"],c:"Dry atmosphere",h:["safety"]},
    {k:"int",t:"Cell integration",in:["Catholyte fraction in cathode","Paired with a separator-layer SE"],c:"Stack pressure",h:["cost"]}],
   notes:{"Hydrolysis":"Moisture exposure can release HCl. A smaller analog of the sulfide H₂S question.","Carry into TEA":"Y is the cost and supply-risk swing. Zr-based variants trade cost for conductivity.","Scope note":"Treat as a sensitivity case unless you find credible Na-halide pilot data."}},
- {id:"gpe",name:"Polymer / GPE · composite",formula:"PEO–PPC + Na salt + NASICON filler",role:"Your lab's system. Roll-to-roll compatible, low process T.",
+ {id:"gpe",name:"Polymer / GPE · composite",formula:"PEO–PPC + Na salt + NASICON filler",role:"Our lab's system. Roll-to-roll compatible, low process T.",
   steps:[
    {k:"bg",t:"Polymers and salt",in:["PEO (from ethylene oxide)","PPC (CO₂ + propylene oxide)","Na salt: NaTFSI, NaFSI, NaClO₄ or NaPF₆"],c:"PPC embeds CO₂, so check allocation",h:["cost","safety"]},
    {k:"bg",t:"Ceramic filler",in:["NZSP from the oxide flow"],c:"Filler wt% scales that flow's burdens",h:["energy"]},
