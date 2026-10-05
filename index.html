@@ -113,7 +113,7 @@ section{display:flex;flex-direction:column;gap:16px}
 <header>
   <h1>Na-ion electrolyte process flows</h1>
   <p>Electrolyte-level process flows for the NaPF₆ liquid baseline and four solid or gel alternatives. Each card is one unit process. Every card lists the inputs needed as LCI flows and TEA line items, and tags the likely hotspots. The system boundary stops at the cell. Module, pack and BMS are held identical across scenarios and dropped.</p>
-  <span class="dline"><i></i>Na D-line, 589 nm: accent marks foreground processes you model</span>
+  <span class="dline"><i></i>Na D-line, 589 nm: accent marks foreground processes we will model. </span>
   <div class="legend">
     <span><i class="sw bg"></i>Background (ecoinvent / GREET / literature)</span>
     <span><i class="sw fg"></i>Foreground synthesis &amp; processing (our model)</span>
@@ -215,7 +215,7 @@ const FLOWS=[
    {k:"fg",t:"Synthesis",in:["Ball milling, or","Sealed-ampoule anneal"],c:"≈ 400–550 °C, inert",h:["energy"]},
    {k:"fg",t:"Densify",in:["Cold press","Often used mixed into cathode"],c:"Dry atmosphere",h:["safety"]},
    {k:"int",t:"Cell integration",in:["Catholyte fraction in cathode","Paired with a separator-layer SE"],c:"Stack pressure",h:["cost"]}],
-  notes:{"Hydrolysis":"Moisture exposure can release HCl. A smaller analog of the sulfide H₂S question.","Carry into TEA":"Y is the cost and supply-risk swing. Zr-based variants trade cost for conductivity.","Scope note":"Treat as a sensitivity case unless you find credible Na-halide pilot data."}},
+  notes:{"Hydrolysis":"Moisture exposure can release HCl. A smaller analog of the sulfide H₂S question.","Carry into TEA":"Y is the cost and supply-risk swing. Zr-based variants trade cost for conductivity.","Scope note":"Treat as a sensitivity case unless we find credible Na-halide pilot data."}},
  {id:"gpe",name:"Polymer / GPE · composite",formula:"PEO–PPC + Na salt + NASICON filler",role:"Our lab's system. Roll-to-roll compatible, low process T.",
   steps:[
    {k:"bg",t:"Polymers and salt",in:["PEO (from ethylene oxide)","PPC (CO₂ + propylene oxide)","Na salt: NaTFSI, NaFSI, NaClO₄ or NaPF₆"],c:"PPC embeds CO₂, so check allocation",h:["cost","safety"]},
