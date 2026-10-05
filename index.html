@@ -5,15 +5,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Na-ion Electrolyte Process Flows</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Serif:wght@500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter+Tight:wght@700&family=Roboto+Condensed:wght@400;500;600;700&display=swap">
 <style>
 :root{
-  --bg:#f5f6f8; --surface:#ffffff; --ink:#1b2230; --muted:#5b6475; --line:#d9dde5;
+  --bg:#e4e6ea; --surface:#ffffff; --ink:#1b2230; --muted:#5b6475; --line:#d9dde5;
   --na:#e8a317; --na-soft:#fbefd2; --na-ink:#7a5100;
   --bg-step:#eef1f6; --fg-step:#fff8e8; --int-step:#eaf3ef;
   --bg-edge:#8391a8; --fg-edge:#e8a317; --int-edge:#3f8f6e;
   --energy:#b3541e; --emis:#6c4bb4; --cost:#1f6fb2; --safety:#c0392b;
-  --serif:"IBM Plex Serif",Georgia,serif; --sans:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif; --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  --serif:"Inter Tight",system-ui,-apple-system,"Segoe UI",sans-serif; --sans:"Roboto Condensed","Arial Narrow",system-ui,sans-serif; --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
 }
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
@@ -36,7 +36,7 @@
 *{box-sizing:border-box}
 body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.55;padding:0 20px}
 .wrap{max-width:1180px;margin:0 auto;padding-block:40px 64px;display:flex;flex-direction:column;gap:40px}
-h1,h2,h3{font-family:var(--serif);text-wrap:balance;margin:0;font-weight:600}
+h1,h2,h3{font-family:var(--serif);text-wrap:balance;margin:0;font-weight:700}
 h1{font-size:clamp(1.7rem,3.4vw,2.4rem);line-height:1.15}
 h2{font-size:1.35rem}
 h3{font-size:1.1rem}
@@ -83,7 +83,7 @@ nav.jump a:hover,nav.jump a:focus-visible{border-color:var(--na);outline:none}
 table{border-collapse:collapse;width:100%;min-width:860px;font-size:.84rem}
 th,td{text-align:left;vertical-align:top;padding:10px 12px;border-bottom:1px solid var(--line)}
 thead th{font-family:var(--mono);font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:500;background:var(--bg)}
-tbody th{font-family:var(--serif);font-weight:600;font-size:.92rem;white-space:nowrap}
+tbody th{font-family:var(--serif);font-weight:700;font-size:.92rem;white-space:nowrap}
 tr:last-child td,tr:last-child th{border-bottom:none}
 
 .calc{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:24px;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:28px}
@@ -101,7 +101,9 @@ tr:last-child td,tr:last-child th{border-bottom:none}
 .small{font-size:.8rem;color:var(--muted)}
 .eqblock{font-family:var(--mono);font-size:.8rem;color:var(--muted);background:var(--bg);border-radius:4px;padding:10px 12px;line-height:1.7}
 section{display:flex;flex-direction:column;gap:16px}
-.next ol{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:6px;max-width:80ch}
+.refs ol{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px;max-width:90ch}
+.refs li{padding-left:2.2em;text-indent:-2.2em;font-size:.9rem}
+.refs a{color:var(--cost);word-break:break-word}
 @media (max-width:480px){.fields{grid-template-columns:1fr}.flow,.calc{padding:16px}}
 </style>
 </head>
@@ -109,7 +111,6 @@ section{display:flex;flex-direction:column;gap:16px}
 
 <div class="wrap">
 <header>
-  <span class="eyebrow">ENGG 192 · LCA / TEA foreground model · draft v1</span>
   <h1>Na-ion electrolyte process flows</h1>
   <p>Electrolyte-level process flows for the NaPF₆ liquid baseline and four solid or gel alternatives. Each card is one unit process. Every card lists the inputs you will need as LCI flows and TEA line items, and tags the likely hotspots. The system boundary stops at the cell. Module, pack and BMS are held identical across scenarios and dropped.</p>
   <span class="dline"><i></i>Na D-line, 589 nm: accent marks foreground processes you model</span>
@@ -165,13 +166,21 @@ section{display:flex;flex-direction:column;gap:16px}
   </div>
 </section>
 
-<section class="next">
-  <h2>What this feeds next</h2>
+<section class="refs" id="references">
+  <h2>References</h2>
   <ol>
-    <li>Turn each foreground card into one row block in the Excel TEA skeleton: inputs (kg per kg product), utilities (kWh, m³ gas), yield, equipment, labor.</li>
-    <li>The same rows become foreground processes in OpenLCA. Link each background card to its ecoinvent activity, or flag it as a proxy where none exists (Na₂S, P₂S₅, YCl₃, PPC).</li>
-    <li>Sulfide H₂S bounds come straight from the stoichiometry box, scaled by the per-kWh mass above.</li>
-    <li>The salt row in the GPE flow is where the NaPF₆ vs. NaTFSI vs. NaClO₄ regulatory cost layer attaches.</li>
+    <li>Argonne National Laboratory. (n.d.). <i>GREET model</i> [Computer software]. <a href="https://greet.anl.gov/">https://greet.anl.gov/</a></li>
+    <li>Chitu, J. (n.d.). <i>NA EV</i> [Unpublished course presentation].</li>
+    <li>European Parliament &amp; Council of the European Union. (2023). Regulation (EU) 2023/1542 of the European Parliament and of the Council of 12 July 2023 concerning batteries and waste batteries, amending Directive 2008/98/EC and Regulation (EU) 2019/1020 and repealing Directive 2006/66/EC. <i>Official Journal of the European Union, L 191</i>, 1–117. <a href="http://data.europa.eu/eli/reg/2023/1542/oj">http://data.europa.eu/eli/reg/2023/1542/oj</a></li>
+    <li>Goodenough, J. B., Hong, H. Y.-P., &amp; Kafalas, J. A. (1976). Fast Na<sup>+</sup>-ion transport in skeleton structures. <i>Materials Research Bulletin, 11</i>(2), 203–220. <a href="https://doi.org/10.1016/0025-5408(76)90077-5">https://doi.org/10.1016/0025-5408(76)90077-5</a></li>
+    <li>Hayashi, A., Noi, K., Sakuda, A., &amp; Tatsumisago, M. (2012). Superionic glass-ceramic electrolytes for room-temperature rechargeable sodium batteries. <i>Nature Communications, 3</i>, Article 856. <a href="https://doi.org/10.1038/ncomms1843">https://doi.org/10.1038/ncomms1843</a></li>
+    <li>Hong, H. Y.-P. (1976). Crystal structures and crystal chemistry in the system Na<sub>1+x</sub>Zr<sub>2</sub>Si<sub>x</sub>P<sub>3−x</sub>O<sub>12</sub>. <i>Materials Research Bulletin, 11</i>(2), 173–182. <a href="https://doi.org/10.1016/0025-5408(76)90073-8">https://doi.org/10.1016/0025-5408(76)90073-8</a></li>
+    <li>Inoue, S., Koinuma, H., &amp; Tsuruta, T. (1969). Copolymerization of carbon dioxide and epoxide. <i>Journal of Polymer Science Part B: Polymer Letters, 7</i>(4), 287–292. <a href="https://doi.org/10.1002/pol.1969.110070408">https://doi.org/10.1002/pol.1969.110070408</a></li>
+    <li>Matios, E., Wang, H., Luo, J., Zhang, Y., Wang, C., Lu, X., Hu, X., Xu, Y., &amp; Li, W. (2021). Reactivity-guided formulation of composite solid polymer electrolytes for superior sodium metal batteries. <i>Journal of Materials Chemistry A, 9</i>(34), 18632–18643. <a href="https://doi.org/10.1039/D1TA05490B">https://doi.org/10.1039/D1TA05490B</a></li>
+    <li>Rosenbaum, R. K., Bachmann, T. M., Gold, L. S., Huijbregts, M. A. J., Jolliet, O., Juraske, R., Koehler, A., Larsen, H. F., MacLeod, M., Margni, M., McKone, T. E., Payet, J., Schuhmacher, M., van de Meent, D., &amp; Hauschild, M. Z. (2008). USEtox—the UNEP-SETAC toxicity model: Recommended characterisation factors for human toxicity and freshwater ecotoxicity in life cycle impact assessment. <i>The International Journal of Life Cycle Assessment, 13</i>(7), 532–546. <a href="https://doi.org/10.1007/s11367-008-0038-4">https://doi.org/10.1007/s11367-008-0038-4</a></li>
+    <li>U.S. Environmental Protection Agency. (2021). <i>PFAS strategic roadmap: EPA’s commitments to action 2021–2024</i> (EPA-100-K-21-002). <a href="https://www.epa.gov/pfas/pfas-strategic-roadmap-epas-commitments-action-2021-2024">https://www.epa.gov/pfas/pfas-strategic-roadmap-epas-commitments-action-2021-2024</a></li>
+    <li>Wernet, G., Bauer, C., Steubing, B., Reinhard, J., Moreno-Ruiz, E., &amp; Weidema, B. (2016). The ecoinvent database version 3 (part I): Overview and methodology. <i>The International Journal of Life Cycle Assessment, 21</i>(9), 1218–1230. <a href="https://doi.org/10.1007/s11367-016-1087-8">https://doi.org/10.1007/s11367-016-1087-8</a></li>
+    <li>Wu, E. A., Banerjee, S., Tang, H., Richardson, P. M., Doux, J.-M., Qi, J., Zhu, Z., Grenier, A., Li, Y., Zhao, E., Deysher, G., Sebti, E., Nguyen, H., Stephens, R., Verbist, G., Chapman, K. W., Clément, R. J., Banerjee, A., Meng, Y. S., &amp; Ong, S. P. (2021). A stable cathode-solid electrolyte composite for high-voltage, long-cycle-life solid-state sodium-ion batteries. <i>Nature Communications, 12</i>, Article 1256. <a href="https://doi.org/10.1038/s41467-021-21488-7">https://doi.org/10.1038/s41467-021-21488-7</a></li>
   </ol>
 </section>
 </div>
