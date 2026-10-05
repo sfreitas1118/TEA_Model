@@ -193,7 +193,7 @@ const FLOWS=[
    {k:"bg",t:"Solvent production",in:["EC: ethylene oxide + CO₂","PC: propylene oxide + CO₂","DMC"],c:"Distill to battery grade, <20 ppm H₂O",h:["energy"]},
    {k:"fg",t:"Formulation",in:["Dissolve salt and additives","Filter, QC for H₂O and HF"],c:"Dry room or Ar glovebox",h:["energy"]},
    {k:"int",t:"Cell integration",in:["Polyolefin separator","Electrolyte fill (≈ g/Ah)","Wetting, formation, degas"],c:"Dry room, dew point ≈ −40 °C",h:["energy","cost"]}],
-  notes:{"Fluorine / PFAS":"NaPF₆ hydrolysis gives HF, POF₃. This is the PFAS regulatory layer you cost against.","Carry into TEA":"Salt $/kg, solvent $/kg, fill g/Ah, separator $/m², dry-room kWh/m²·yr.","End of life":"Electrolyte recovery rarely credited. Assume incineration with HF scrubbing."}},
+  notes:{"Fluorine / PFAS":"NaPF₆ hydrolysis gives HF and POF₃. NaPF₆ has no carbon, so it is not a PFAS under the OECD definition; the PVDF binder is. Cost fluorine handling and regulatory scenarios explicitly.","Carry into TEA":"Salt $/kg, solvent $/kg, fill g/Ah, separator $/m², dry-room kWh/m²·yr.","End of life":"Electrolyte recovery rarely credited. Assume incineration with HF scrubbing."}},
  {id:"oxide",name:"Oxide · NASICON",formula:"Na₃Zr₂Si₂PO₁₂ (NZSP)",role:"Air-stable ceramic. Energy intensive to sinter.",
   steps:[
    {k:"bg",t:"Precursors",in:["Na₂CO₃","ZrO₂","SiO₂","NH₄H₂PO₄"],c:"Sol-gel alt: Zr alkoxide + TEOS",h:["cost"]},
@@ -223,7 +223,7 @@ const FLOWS=[
    {k:"fg",t:"Cast or extrude",in:["Solution cast (acetonitrile, DMF) or","Solvent-free hot press / extrusion"],c:"≈ 60–120 °C",h:["energy","emis"]},
    {k:"fg",t:"Dry and condition",in:["Vacuum dry","Solvent recovery"],c:"GPE variant: liquid uptake or in-situ polymerization",h:["energy"]},
    {k:"int",t:"Cell integration",in:["Laminate film","Mild heat and pressure"],c:"Closest to existing Li-ion lines",h:["cost"]}],
-  notes:{"Salt choice moves PFAS risk":"NaTFSI and NaFSI are fluorinated. Only NaClO₄ or other non-fluorinated salts fully avoid the PFAS layer, and NaClO₄ has its own oxidizer hazard.","Carry into TEA":"Casting solvent use and recovery rate, film thickness, filler loading, line speed.","LCA hotspot":"Solvent recovery rate often dominates. Run it as a sensitivity parameter (e.g. 90–99%)."}}
+  notes:{"Salt choice moves PFAS risk":"NaTFSI contains CF₃ groups and is a PFAS under the OECD definition. NaFSI and NaPF₆ are fluorinated but carbon-free. NaClO₄ avoids fluorine but is an oxidizer.","Carry into TEA":"Casting solvent use and recovery rate, film thickness, filler loading, line speed.","LCA hotspot":"Solvent recovery rate often dominates. Run it as a sensitivity parameter (e.g. 90–99%)."}}
 ];
 const CMP=[
  ["NaPF₆ liquid","≈ ambient (salt synth low T)","Dry room","n/a","Salt + separator","HF route, solvent production"],
