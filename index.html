@@ -80,7 +80,7 @@ nav.jump a:hover,nav.jump a:focus-visible{border-color:var(--na);outline:none}
 .callout .eq{font-family:var(--mono);font-size:.84rem}
 
 .tbl-wrap{overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:6px}
-table{border-collapse:collapse;width:100%;min-width:860px;font-size:.84rem}
+table{border-collapse:collapse;width:100%;min-width:760px;font-size:.84rem}
 th,td{text-align:left;vertical-align:top;padding:10px 12px;border-bottom:1px solid var(--line)}
 thead th{font-family:var(--mono);font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:500;background:var(--bg)}
 tbody th{font-family:var(--serif);font-weight:700;font-size:.92rem;white-space:nowrap}
@@ -135,7 +135,7 @@ section{display:flex;flex-direction:column;gap:16px}
   <p class="small">Illustrative ranges from typical lab and pilot routes. Replace each one with a cited value when you build the parameter sheet.</p>
   <div class="tbl-wrap">
     <table>
-      <thead><tr><th>Chemistry</th><th>Peak process T</th><th>Atmosphere</th><th>Densification</th><th>Main cost driver</th><th>LCA hotspot</th><th>Research gap hook</th></tr></thead>
+      <thead><tr><th>Chemistry</th><th>Peak process T</th><th>Atmosphere</th><th>Densification</th><th>Main cost driver</th><th>LCA hotspot</th></tr></thead>
       <tbody id="cmp"></tbody>
     </table>
   </div>
@@ -208,7 +208,7 @@ const FLOWS=[
    {k:"fg",t:"Densify and cast",in:["Slurry in nonpolar solvent + binder","Cold press"],c:"No high-T sinter. Dry room / Ar",h:["energy","safety"]},
    {k:"int",t:"Cell integration",in:["High stack pressure","H₂S monitoring, scrubbers","Moisture barrier packaging"],c:"Dew point well below Li-ion dry rooms",h:["safety","cost"]}],
   notes:{"H₂S exposure points":"Manufacturing leaks, cell breach in use, and recycling or landfill at end of life. Model each as a bounded scenario.","Carry into TEA":"Milling kWh/kg, Ar consumption, dry-room upgrade CapEx, scrubber CapEx and reagent.","Data gap":"Na₂S and P₂S₅ at battery grade need proxy inventories. State the proxy clearly."},
-  callout:{t:"Gap 2 bound: worst-case H₂S from full hydrolysis",eq:"Na₃PS₄ + 4 H₂O → Na₃PO₄ + 4 H₂S",x:"228.2 g Na₃PS₄ → 136.3 g H₂S, so at most ≈ 0.60 g H₂S per g electrolyte. Multiply by the per-kWh mass below for an upper bound, then apply USEtox factors."}},
+  callout:{t:"Worst-case H₂S from full hydrolysis",eq:"Na₃PS₄ + 4 H₂O → Na₃PO₄ + 4 H₂S",x:"228.2 g Na₃PS₄ → 136.3 g H₂S, so at most ≈ 0.60 g H₂S per g electrolyte. Multiply by the per-kWh mass below for an upper bound, then apply USEtox factors."}},
  {id:"halide",name:"Halide",formula:"Na₃YCl₆, Na₂ZrCl₆ family",role:"Oxidation stable, good as catholyte. Moderate moisture sensitivity.",
   steps:[
    {k:"bg",t:"Precursors",in:["NaCl","YCl₃ or ZrCl₄ (anhydrous)"],c:"ZrCl₄ from zircon carbochlorination",h:["cost","emis"]},
@@ -226,11 +226,11 @@ const FLOWS=[
   notes:{"Salt choice moves PFAS risk":"NaTFSI and NaFSI are fluorinated. Only NaClO₄ or other non-fluorinated salts fully avoid the PFAS layer, and NaClO₄ has its own oxidizer hazard.","Carry into TEA":"Casting solvent use and recovery rate, film thickness, filler loading, line speed.","LCA hotspot":"Solvent recovery rate often dominates. Run it as a sensitivity parameter (e.g. 90–99%)."}}
 ];
 const CMP=[
- ["NaPF₆ liquid","≈ ambient (salt synth low T)","Dry room","n/a","Salt + separator","HF route, solvent production","Gap 3: PFAS cost layer"],
- ["Oxide NASICON","≈ 1150–1250 °C","Ambient air","High-T sinter","Kiln energy, yield, thickness","Sintering electricity or gas","Gap 1: first scaled TEA"],
- ["Sulfide","≈ 250–300 °C","Ar / very dry","Cold press","Precursors, dry-room CapEx","Na₂S, P₂S₅ production; H₂S","Gap 2: H₂S bounds"],
- ["Halide","≈ 400–550 °C","Inert / dry","Cold press","YCl₃ or ZrCl₄","Chlorination, milling","Gap 1: sensitivity case"],
- ["Polymer / GPE","≈ 60–120 °C","Dry room","None (cast film)","Salt, solvent recovery","Casting solvent, salt","Gaps 1 and 3"]
+ ["NaPF₆ liquid","≈ ambient (salt synth low T)","Dry room","n/a","Salt + separator","HF route, solvent production"],
+ ["Oxide NASICON","≈ 1150–1250 °C","Ambient air","High-T sinter","Kiln energy, yield, thickness","Sintering electricity or gas"],
+ ["Sulfide","≈ 250–300 °C","Ar / very dry","Cold press","Precursors, dry-room CapEx","Na₂S, P₂S₅ production; H₂S"],
+ ["Halide","≈ 400–550 °C","Inert / dry","Cold press","YCl₃ or ZrCl₄","Chlorination, milling"],
+ ["Polymer / GPE","≈ 60–120 °C","Dry room","None (cast film)","Salt, solvent recovery","Casting solvent, salt"]
 ];
 const PRESETS={
  oxide:{label:"Oxide NZSP sheet",t:100,rho:3.2,q:3,v:3.2,price:50,yld:85},
