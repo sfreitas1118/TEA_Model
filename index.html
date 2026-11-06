@@ -105,6 +105,16 @@ section{display:flex;flex-direction:column;gap:16px}
 .refs li{padding-left:2.2em;text-indent:-2.2em;font-size:.9rem}
 .refs a{color:var(--cost);word-break:break-word}
 @media (max-width:480px){.fields{grid-template-columns:1fr}.flow,.calc{padding:16px}}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px}
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:14px 16px;display:flex;flex-direction:column;gap:4px}
+.stat.key{border-top:3px solid var(--na)}
+.stat b{font-family:var(--mono);font-size:1.45rem;font-weight:500;font-variant-numeric:tabular-nums}
+.stat span{font-size:.82rem;color:var(--muted)}
+.tea{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:24px;display:flex;flex-direction:column;gap:18px;scroll-margin-top:16px}
+.tea h3{margin-top:4px}
+.tea table{min-width:680px}
+td.num,th.num{text-align:right;font-family:var(--mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+.concl{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:8px;max-width:90ch}
 </style>
 </head>
 <body>
@@ -166,18 +176,106 @@ section{display:flex;flex-direction:column;gap:16px}
   </div>
 </section>
 
+<section class="tea" id="tea-baseline">
+  <span class="eyebrow">Updated Nov 2026 · SF_TEA_tables.xlsx</span>
+  <h2>Liquid NaPF₆ baseline: plant-level TEA</h2>
+  <p>With Na-ion material prices in place of the Li-ion proxies, the baseline cell costs <strong>$52.63/kWh</strong>, down from $69.27/kWh. The plant makes 8 GWh/yr of 150 Wh/kg cells (Prussian White / hard carbon / 1 M NaPF₆ carbonate) for stationary storage. Functional unit: 1 kWh of cell capacity.</p>
+
+  <div class="stats">
+    <div class="stat key"><b>$52.63</b><span>Levelized cell cost per kWh</span></div>
+    <div class="stat"><b>$30.81</b><span>Materials per kWh (59%)</span></div>
+    <div class="stat"><b>$11.39</b><span>Other OpEx per kWh (73% gross-up)</span></div>
+    <div class="stat"><b>$10.43</b><span>Annualized CapEx per kWh (8%, 10 yr)</span></div>
+    <div class="stat"><b>$4.04</b><span>Electrolyte per kWh (13% of materials)</span></div>
+  </div>
+
+  <h3>Material prices: Li-ion proxies replaced</h3>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Material</th><th class="num">Previous</th><th class="num">Now</th><th>Source (price date)</th><th class="num">Share of materials</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">Prussian White cathode</th><td class="num">$5.00/kg</td><td class="num">$3.12/kg</td><td>SMM China Prussian White, $2,759–3,481/t (28 Aug 2026). Cross-check: Büchele et al. (2025), raw-material cost &lt; $4.56/kg</td><td class="num">22.5%</td></tr>
+        <tr><th scope="row">Hard carbon anode</th><td class="num">$6.00/kg</td><td class="num">$6.06/kg</td><td>SMM hard carbon, Large Storage Type, $5,727–6,384/t (28 Aug 2026). Cross-check: Peters et al. (2019), €3.65–17.28/kg by precursor</td><td class="num">29.1%</td></tr>
+        <tr><th scope="row">NaPF₆ electrolyte (finished)</th><td class="num">$14/L (≈ $11.7/kg)</td><td class="num">$3.90/kg</td><td>SMM Na-ion electrolyte, $3,126–4,663/t by grade (28 Aug 2026). Previous value was Argonne's Li-ion LiPF₆ price</td><td class="num">13.1%</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="small">SMM quotes some prices with and without VAT. Confirm the basis before final use. Housing, binders, conductive carbon, foil and separator still use Argonne BatPaC 2024 (Li-ion) prices.</p>
+
+  <h3>Sensitivity: change in cell cost ($/kWh), one input at a time</h3>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Input (cheaper / costlier setting)</th><th class="num">Cheaper</th><th class="num">Costlier</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">Scrap per step (2.5% / 15%)</th><td class="num">−2.22</td><td class="num">+12.06</td></tr>
+        <tr><th scope="row">Energy density (175 / 128 Wh/kg)</th><td class="num">−6.03</td><td class="num">+7.25</td></tr>
+        <tr><th scope="row">Plant life (15 / 7 yr)</th><td class="num">−2.25</td><td class="num">+3.01</td></tr>
+        <tr><th scope="row">Other OpEx (±20%)</th><td class="num">−2.28</td><td class="num">+2.28</td></tr>
+        <tr><th scope="row">CapEx (±20%)</th><td class="num">−2.09</td><td class="num">+2.09</td></tr>
+        <tr><th scope="row">Anode price (±20%)</th><td class="num">−1.80</td><td class="num">+1.80</td></tr>
+        <tr><th scope="row">Cathode price (±20%)</th><td class="num">−1.39</td><td class="num">+1.39</td></tr>
+        <tr><th scope="row">Discount rate (5% / 10%)</th><td class="num">−1.37</td><td class="num">+0.96</td></tr>
+        <tr><th scope="row">Electrolyte price (±20%)</th><td class="num">−0.81</td><td class="num">+0.81</td></tr>
+        <tr><th scope="row">Plant capacity (2 / 50 GWh/yr)</th><td class="num">0</td><td class="num">0</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="small">Scrap, energy density and plant capacity rows were recomputed from the Inputs low/high values. The other rows are in the workbook.</p>
+
+  <h3>Benchmarks</h3>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Benchmark</th><th class="num">$/kWh</th><th>Basis</th><th>Source</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">This model</th><td class="num">52.63</td><td>cell</td><td>SF_TEA_tables.xlsx</td></tr>
+        <tr><th scope="row">Na-ion cell, H1 2025</th><td class="num">70.4–84.5</td><td>cell</td><td>SMM (2025), 0.5–0.6 CNY/Wh at 7.1 CNY/USD</td></tr>
+        <tr><th scope="row">Stationary Li-ion pack, 2025</th><td class="num">70</td><td>pack</td><td>BloombergNEF (2025)</td></tr>
+        <tr><th scope="row">Na-ion cell average</th><td class="num">≈ 87</td><td>cell</td><td>IDTechEx (2024)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Conclusions so far</h3>
+  <ol class="concl">
+    <li>With Na-ion prices, the baseline cell costs $52.63/kWh, about $25 below the 2025 Na-ion market midpoint. The gap points to costs the model is still missing, not to a real advantage.</li>
+    <li>Non-material OpEx is scaled from material cost with a Li-ion ratio (73%). Cheaper Na-ion materials therefore also shrink labor, energy and overhead, which is not physical. A bottom-up build is the top fix.</li>
+    <li>Process scrap and energy density move cost more than any single price. Solid-state lines with higher ramp-up scrap will be penalized most.</li>
+    <li>The liquid electrolyte is now a small cost line ($4.04/kWh, 13% of materials). Solid and gel electrolytes will be judged mainly by their processing (sintering, dry room, H₂S handling) and scrap, not by salt price.</li>
+    <li>CapEx is fixed at 70 M$/GWh, so plant scale has no effect. It should follow the scaling fit.</li>
+  </ol>
+
+  <h3>Open model issues</h3>
+  <ul class="concl">
+    <li>Build labor, energy, dry room and overhead bottom-up; drop the 73% gross-up (it also double counts depreciation with the annualized CapEx).</li>
+    <li>Compute CapEx/GWh from the fitted curve at each plant size.</li>
+    <li>Use one component list in the mass balance and costing; remove BMS from the cell boundary.</li>
+    <li>Convert separator and foil prices with areal density (g/m²).</li>
+    <li>Add oxide, sulfide, halide and gel polymer electrolyte cases on this baseline.</li>
+  </ul>
+</section>
+
 <section class="refs" id="references">
   <h2>References</h2>
   <ol>
     <li>Argonne National Laboratory. (n.d.). <i>GREET model</i> [Computer software]. <a href="https://greet.anl.gov/">https://greet.anl.gov/</a></li>
+    <li>BloombergNEF. (2025, December 9). <i>Lithium-ion battery pack prices fall to $108 per kilowatt-hour, despite rising metal prices</i> [Press release]. <a href="https://about.bnef.com/insights/clean-transport/lithium-ion-battery-pack-prices-fall-to-108-per-kilowatt-hour-despite-rising-metal-prices-bloombergnef/">https://about.bnef.com/insights/clean-transport/lithium-ion-battery-pack-prices-fall-to-108-per-kilowatt-hour-despite-rising-metal-prices-bloombergnef/</a></li>
+    <li>Büchele, S., Mereacre, V., Bohn, N., Stüble, P., Wu, X., Keim, N., Xu, R., Geßwein, H., Sun, W., Vrhovac, G., Pordzik, M., Bergfeldt, T., Indris, S., Bauer, W., Ehrenberg, H., &amp; Binder, J. R. (2025). Sodium manganese hexacyanoferrate: Characterization as sodium-ion battery cathode material, full cell cycling with hard carbon and post-mortem analyses. <i>Batteries &amp; Supercaps</i>. <a href="https://doi.org/10.1002/batt.202500015">https://doi.org/10.1002/batt.202500015</a></li>
     <li>Chitu, J. (n.d.). <i>NA EV</i> [Unpublished course presentation].</li>
+    <li>Duffner, F., Mauler, L., Wentker, M., Leker, J., &amp; Winter, M. (2021). Large-scale automotive battery cell manufacturing: Analyzing strategic and operational effects on manufacturing costs. <i>International Journal of Production Economics, 232</i>, Article 107982. <a href="https://doi.org/10.1016/j.ijpe.2020.107982">https://doi.org/10.1016/j.ijpe.2020.107982</a></li>
     <li>European Parliament &amp; Council of the European Union. (2023). Regulation (EU) 2023/1542 of the European Parliament and of the Council of 12 July 2023 concerning batteries and waste batteries, amending Directive 2008/98/EC and Regulation (EU) 2019/1020 and repealing Directive 2006/66/EC. <i>Official Journal of the European Union, L 191</i>, 1–117. <a href="http://data.europa.eu/eli/reg/2023/1542/oj">http://data.europa.eu/eli/reg/2023/1542/oj</a></li>
+    <li>Fraunhofer Research Institution for Battery Cell Production FFB &amp; Chair of Production Engineering of E-Mobility Components (PEM), RWTH Aachen University. (2024). <i>Mastering ramp-up of battery production</i> [White paper]. <a href="https://www.ffb.fraunhofer.de/en/publications/White_papers_environment_reports_studies/Mastering_Ramp-up_of_Battery_Production.html">https://www.ffb.fraunhofer.de/en/publications/White_papers_environment_reports_studies/Mastering_Ramp-up_of_Battery_Production.html</a></li>
     <li>Goodenough, J. B., Hong, H. Y.-P., &amp; Kafalas, J. A. (1976). Fast Na<sup>+</sup>-ion transport in skeleton structures. <i>Materials Research Bulletin, 11</i>(2), 203–220. <a href="https://doi.org/10.1016/0025-5408(76)90077-5">https://doi.org/10.1016/0025-5408(76)90077-5</a></li>
     <li>Hayashi, A., Noi, K., Sakuda, A., &amp; Tatsumisago, M. (2012). Superionic glass-ceramic electrolytes for room-temperature rechargeable sodium batteries. <i>Nature Communications, 3</i>, Article 856. <a href="https://doi.org/10.1038/ncomms1843">https://doi.org/10.1038/ncomms1843</a></li>
     <li>Hong, H. Y.-P. (1976). Crystal structures and crystal chemistry in the system Na<sub>1+x</sub>Zr<sub>2</sub>Si<sub>x</sub>P<sub>3−x</sub>O<sub>12</sub>. <i>Materials Research Bulletin, 11</i>(2), 173–182. <a href="https://doi.org/10.1016/0025-5408(76)90073-8">https://doi.org/10.1016/0025-5408(76)90073-8</a></li>
+    <li>IDTechEx. (2024). <i>Sodium-ion batteries 2024–2034: Technology, players, markets, and forecasts</i>. <a href="https://www.idtechex.com/en/research-report/sodium-ion-batteries/978">https://www.idtechex.com/en/research-report/sodium-ion-batteries/978</a></li>
     <li>Inoue, S., Koinuma, H., &amp; Tsuruta, T. (1969). Copolymerization of carbon dioxide and epoxide. <i>Journal of Polymer Science Part B: Polymer Letters, 7</i>(4), 287–292. <a href="https://doi.org/10.1002/pol.1969.110070408">https://doi.org/10.1002/pol.1969.110070408</a></li>
+    <li>Knehr, K. W., Kubal, J. J., Nelson, P. A., &amp; Ahmed, S. (2022). <i>Battery performance and cost modeling for electric-drive vehicles: A manual for BatPaC v5.0</i> (ANL/CSE-22/1). Argonne National Laboratory. <a href="https://publications.anl.gov/anlpubs/2022/07/176234.pdf">https://publications.anl.gov/anlpubs/2022/07/176234.pdf</a></li>
     <li>Matios, E., Wang, H., Luo, J., Zhang, Y., Wang, C., Lu, X., Hu, X., Xu, Y., &amp; Li, W. (2021). Reactivity-guided formulation of composite solid polymer electrolytes for superior sodium metal batteries. <i>Journal of Materials Chemistry A, 9</i>(34), 18632–18643. <a href="https://doi.org/10.1039/D1TA05490B">https://doi.org/10.1039/D1TA05490B</a></li>
+    <li>Peters, J. F., Peña Cruz, A., &amp; Weil, M. (2019). Exploring the economic potential of sodium-ion batteries. <i>Batteries, 5</i>(1), Article 10. <a href="https://doi.org/10.3390/batteries5010010">https://doi.org/10.3390/batteries5010010</a></li>
     <li>Rosenbaum, R. K., Bachmann, T. M., Gold, L. S., Huijbregts, M. A. J., Jolliet, O., Juraske, R., Koehler, A., Larsen, H. F., MacLeod, M., Margni, M., McKone, T. E., Payet, J., Schuhmacher, M., van de Meent, D., &amp; Hauschild, M. Z. (2008). USEtox—the UNEP-SETAC toxicity model: Recommended characterisation factors for human toxicity and freshwater ecotoxicity in life cycle impact assessment. <i>The International Journal of Life Cycle Assessment, 13</i>(7), 532–546. <a href="https://doi.org/10.1007/s11367-008-0038-4">https://doi.org/10.1007/s11367-008-0038-4</a></li>
+    <li>Schmidt, O., Melchior, S., Hawkes, A., &amp; Staffell, I. (2019). Projecting the future levelized cost of electricity storage technologies. <i>Joule, 3</i>(1), 81–100. <a href="https://doi.org/10.1016/j.joule.2018.12.008">https://doi.org/10.1016/j.joule.2018.12.008</a></li>
+    <li>Shanghai Metals Market. (2025, July 14). <i>[SMM analysis] In-depth observation of sodium-ion battery industry in H1 2025</i>. <a href="https://news.metal.com/newscontent/103426207/">https://news.metal.com/newscontent/103426207/</a></li>
+    <li>Shanghai Metals Market. (2026). <i>Sodium-ion battery prices</i> [Data set; price date August 28, 2026]. <a href="https://www.metal.com/price/New-Energy/Sodium-ion-Battery">https://www.metal.com/price/New-Energy/Sodium-ion-Battery</a></li>
     <li>U.S. Environmental Protection Agency. (2021). <i>PFAS strategic roadmap: EPA’s commitments to action 2021–2024</i> (EPA-100-K-21-002). <a href="https://www.epa.gov/pfas/pfas-strategic-roadmap-epas-commitments-action-2021-2024">https://www.epa.gov/pfas/pfas-strategic-roadmap-epas-commitments-action-2021-2024</a></li>
     <li>Wernet, G., Bauer, C., Steubing, B., Reinhard, J., Moreno-Ruiz, E., &amp; Weidema, B. (2016). The ecoinvent database version 3 (part I): Overview and methodology. <i>The International Journal of Life Cycle Assessment, 21</i>(9), 1218–1230. <a href="https://doi.org/10.1007/s11367-016-1087-8">https://doi.org/10.1007/s11367-016-1087-8</a></li>
     <li>Wu, E. A., Banerjee, S., Tang, H., Richardson, P. M., Doux, J.-M., Qi, J., Zhu, Z., Grenier, A., Li, Y., Zhao, E., Deysher, G., Sebti, E., Nguyen, H., Stephens, R., Verbist, G., Chapman, K. W., Clément, R. J., Banerjee, A., Meng, Y. S., &amp; Ong, S. P. (2021). A stable cathode-solid electrolyte composite for high-voltage, long-cycle-life solid-state sodium-ion batteries. <i>Nature Communications, 12</i>, Article 1256. <a href="https://doi.org/10.1038/s41467-021-21488-7">https://doi.org/10.1038/s41467-021-21488-7</a></li>
@@ -250,6 +348,7 @@ FLOWS.forEach(f=>{
   el.innerHTML=`<div class="flow-head"><div style="display:flex;flex-direction:column;gap:4px"><h3>${f.name}</h3><span class="formula">${f.formula}</span></div><span class="role">${f.role}</span></div><div class="steps">${steps}</div>${call}<div class="notes">${notes}</div>`;
   flowsEl.appendChild(el);
 });
+{const a=document.createElement('a'); a.href='#tea-baseline'; a.textContent='Baseline TEA results'; jump.appendChild(a);}
 document.getElementById('cmp').innerHTML=CMP.map(r=>`<tr><th scope="row">${r[0]}</th>${r.slice(1).map(c=>`<td>${c}</td>`).join('')}</tr>`).join('');
 
 const sel=document.getElementById('preset'); const ids=['t','rho','q','v','price','yld'];
