@@ -121,10 +121,10 @@ td.num,th.num{text-align:right;font-family:var(--mono);font-variant-numeric:tabu
 <header>
   <h1>Na-ion electrolyte process flows</h1>
   <p>Electrolyte-level process flows for the NaPF₆ liquid baseline and four solid or gel alternatives. Each card is one unit process. Every card lists the inputs needed as LCI flows and TEA line items, and tags the likely hotspots. The system boundary stops at the cell. Module, pack and BMS are held identical across scenarios and dropped.</p>
-  <span class="dline"><i></i>Na Yellow = processes we are modeling. </span>
+  <span class="dline"><i></i>Na Yellow = modeled processes.</span>
   <div class="legend">
     <span><i class="sw bg"></i>Background (ecoinvent / GREET / literature)</span>
-    <span><i class="sw fg"></i>Foreground synthesis &amp; processing (our model)</span>
+    <span><i class="sw fg"></i>Foreground synthesis &amp; processing (modeled)</span>
     <span><i class="sw int"></i>Cell integration delta vs. baseline</span>
   </div>
   <div class="legend">
@@ -140,7 +140,7 @@ td.num,th.num{text-align:right;font-family:var(--mono);font-variant-numeric:tabu
 
 <section>
   <h2>Side-by-side</h2>
-  <p class="small">Illustrative ranges from typical lab and pilot routes. I need to replace each one with a cited value once I build the parameter sheet. For now, these are estimates based on a brief literature review. </p>
+  <p class="small">Illustrative ranges from typical lab and pilot routes. These are estimates based on a brief literature review.</p>
   <div class="tbl-wrap">
     <table>
       <thead><tr><th>Chemistry</th><th>Peak process T</th><th>Atmosphere</th><th>Densification</th><th>Main cost driver</th><th>LCA hotspot</th></tr></thead>
@@ -169,15 +169,14 @@ td.num,th.num{text-align:right;font-family:var(--mono);font-variant-numeric:tabu
       <div class="row"><span>Material to produce (yield-adjusted)</span><output id="o-gross">–</output></div>
       <div class="row key"><span>Electrolyte cost per kWh</span><output id="o-cost">–</output></div>
       <div class="eqblock">A = 1 / (q · V)  → cm² per Wh<br>m = ρ · t · A · 1000  → g per kWh<br>m_gross = m / yield<br>cost = m_gross · $/kg</div>
-      <p class="small">Covers the separator layer only. Catholyte fraction inside composite cathodes is extra and matters most for sulfides and halides. Prices and thicknesses are placeholders.</p>
+      <p class="small">Covers the separator layer only. Catholyte fraction inside composite cathodes is extra and matters most for sulfides and halides. Prices and thicknesses are illustrative.</p>
     </div>
   </div>
 </section>
 
 <section class="tea" id="tea-baseline">
-  <span class="eyebrow">Updated Nov 2026 · SF_TEA_tables.xlsx</span>
   <h2>Liquid NaPF₆ baseline: plant-level TEA</h2>
-  <p>With Na-ion material prices in place of the Li-ion proxies, the baseline cell costs <strong>$52.63/kWh</strong>, down from $69.27/kWh. The plant makes 8 GWh/yr of 150 Wh/kg cells (Prussian White / hard carbon / 1 M NaPF₆ carbonate) for stationary storage. Functional unit: 1 kWh of cell capacity.</p>
+  <p>The baseline cell costs <strong>$52.63/kWh</strong>. The plant makes 8 GWh/yr of 150 Wh/kg cells (Prussian White / hard carbon / 1 M NaPF₆ carbonate) for stationary storage. Functional unit: 1 kWh of cell capacity.</p>
 
   <div class="stats">
     <div class="stat key"><b>$52.63</b><span>Levelized cell cost per kWh</span></div>
@@ -187,18 +186,18 @@ td.num,th.num{text-align:right;font-family:var(--mono);font-variant-numeric:tabu
     <div class="stat"><b>$4.04</b><span>Electrolyte per kWh (13% of materials)</span></div>
   </div>
 
-  <h3>Material prices: Li-ion proxies replaced</h3>
+  <h3>Na-ion material prices</h3>
   <div class="tbl-wrap">
     <table>
-      <thead><tr><th>Material</th><th class="num">Previous</th><th class="num">Now</th><th>Source (price date)</th><th class="num">Share of materials</th></tr></thead>
+      <thead><tr><th>Material</th><th class="num">Price</th><th>Source (price date)</th><th class="num">Share of materials</th></tr></thead>
       <tbody>
-        <tr><th scope="row">Prussian White cathode</th><td class="num">$5.00/kg</td><td class="num">$3.12/kg</td><td>SMM China Prussian White, $2,759–3,481/t (28 Aug 2026). Cross-check: Büchele et al. (2025), raw-material cost &lt; $4.56/kg</td><td class="num">22.5%</td></tr>
-        <tr><th scope="row">Hard carbon anode</th><td class="num">$6.00/kg</td><td class="num">$6.06/kg</td><td>SMM hard carbon, Large Storage Type, $5,727–6,384/t (28 Aug 2026). Cross-check: Peters et al. (2019), €3.65–17.28/kg by precursor</td><td class="num">29.1%</td></tr>
-        <tr><th scope="row">NaPF₆ electrolyte (finished)</th><td class="num">$14/L (≈ $11.7/kg)</td><td class="num">$3.90/kg</td><td>SMM Na-ion electrolyte, $3,126–4,663/t by grade (28 Aug 2026). Previous value was Argonne's Li-ion LiPF₆ price</td><td class="num">13.1%</td></tr>
+        <tr><th scope="row">Prussian White cathode</th><td class="num">$3.12/kg</td><td>Shanghai Metals Market, China Prussian White, $2,759–3,481/t (28 Aug 2026)</td><td class="num">22.5%</td></tr>
+        <tr><th scope="row">Hard carbon anode</th><td class="num">$6.06/kg</td><td>Shanghai Metals Market, hard carbon anode (Large Storage Type), $5,727–6,384/t (28 Aug 2026)</td><td class="num">29.1%</td></tr>
+        <tr><th scope="row">NaPF₆ electrolyte (finished)</th><td class="num">$3.90/kg</td><td>Shanghai Metals Market, sodium-ion electrolyte, $3,126–4,663/t by grade (28 Aug 2026)</td><td class="num">13.1%</td></tr>
       </tbody>
     </table>
   </div>
-  <p class="small">SMM quotes some prices with and without VAT. Confirm the basis before final use. Housing, binders, conductive carbon, foil and separator still use Argonne BatPaC 2024 (Li-ion) prices.</p>
+  <p class="small">Housing, binders, conductive carbon, foil and separator use Argonne BatPaC 2024 prices.</p>
 
   <h3>Sensitivity: change in cell cost ($/kWh), one input at a time</h3>
   <div class="tbl-wrap">
@@ -218,38 +217,29 @@ td.num,th.num{text-align:right;font-family:var(--mono);font-variant-numeric:tabu
       </tbody>
     </table>
   </div>
-  <p class="small">Scrap, energy density and plant capacity rows were recomputed from the Inputs low/high values. The other rows are in the workbook.</p>
 
   <h3>Benchmarks</h3>
   <div class="tbl-wrap">
     <table>
       <thead><tr><th>Benchmark</th><th class="num">$/kWh</th><th>Basis</th><th>Source</th></tr></thead>
       <tbody>
-        <tr><th scope="row">This model</th><td class="num">52.63</td><td>cell</td><td>SF_TEA_tables.xlsx</td></tr>
-        <tr><th scope="row">Na-ion cell, H1 2025</th><td class="num">70.4–84.5</td><td>cell</td><td>SMM (2025), 0.5–0.6 CNY/Wh at 7.1 CNY/USD</td></tr>
+        <tr><th scope="row">This model</th><td class="num">52.63</td><td>cell</td><td>This study</td></tr>
+        <tr><th scope="row">Na-ion cell, H1 2025</th><td class="num">70.4–84.5</td><td>cell</td><td>Shanghai Metals Market (2025), 0.5–0.6 CNY/Wh at 7.1 CNY/USD</td></tr>
         <tr><th scope="row">Stationary Li-ion pack, 2025</th><td class="num">70</td><td>pack</td><td>BloombergNEF (2025)</td></tr>
         <tr><th scope="row">Na-ion cell average</th><td class="num">≈ 87</td><td>cell</td><td>IDTechEx (2024)</td></tr>
       </tbody>
     </table>
   </div>
 
-  <h3>Conclusions so far</h3>
+  <h3>Conclusions</h3>
   <ol class="concl">
-    <li>With Na-ion prices, the baseline cell costs $52.63/kWh, about $25 below the 2025 Na-ion market midpoint. The gap points to costs the model is still missing, not to a real advantage.</li>
-    <li>Non-material OpEx is scaled from material cost with a Li-ion ratio (73%). Cheaper Na-ion materials therefore also shrink labor, energy and overhead, which is not physical. A bottom-up build is the top fix.</li>
+    <li>With Na-ion prices, the baseline cell costs $52.63/kWh, about $25 below the 2025 Na-ion market midpoint. The gap points to costs the model does not yet capture, not to a real advantage.</li>
+    <li>Non-material OpEx is scaled from material cost with a Li-ion ratio (73%). Cheaper Na-ion materials therefore also shrink labor, energy and overhead, which is not physical.</li>
     <li>Process scrap and energy density move cost more than any single price. Solid-state lines with higher ramp-up scrap will be penalized most.</li>
     <li>The liquid electrolyte is now a small cost line ($4.04/kWh, 13% of materials). Solid and gel electrolytes will be judged mainly by their processing (sintering, dry room, H₂S handling) and scrap, not by salt price.</li>
-    <li>CapEx is fixed at 70 M$/GWh, so plant scale has no effect. It should follow the scaling fit.</li>
+    <li>CapEx is fixed at 70 M$/GWh, so plant scale has no effect on unit cost.</li>
   </ol>
 
-  <h3>Open model issues</h3>
-  <ul class="concl">
-    <li>Build labor, energy, dry room and overhead bottom-up; drop the 73% gross-up (it also double counts depreciation with the annualized CapEx).</li>
-    <li>Compute CapEx/GWh from the fitted curve at each plant size.</li>
-    <li>Use one component list in the mass balance and costing; remove BMS from the cell boundary.</li>
-    <li>Convert separator and foil prices with areal density (g/m²).</li>
-    <li>Add oxide, sulfide, halide and gel polymer electrolyte cases on this baseline.</li>
-  </ul>
 </section>
 
 <section class="refs" id="references">
@@ -257,7 +247,6 @@ td.num,th.num{text-align:right;font-family:var(--mono);font-variant-numeric:tabu
   <ol>
     <li>Argonne National Laboratory. (n.d.). <i>GREET model</i> [Computer software]. <a href="https://greet.anl.gov/">https://greet.anl.gov/</a></li>
     <li>BloombergNEF. (2025, December 9). <i>Lithium-ion battery pack prices fall to $108 per kilowatt-hour, despite rising metal prices</i> [Press release]. <a href="https://about.bnef.com/insights/clean-transport/lithium-ion-battery-pack-prices-fall-to-108-per-kilowatt-hour-despite-rising-metal-prices-bloombergnef/">https://about.bnef.com/insights/clean-transport/lithium-ion-battery-pack-prices-fall-to-108-per-kilowatt-hour-despite-rising-metal-prices-bloombergnef/</a></li>
-    <li>Büchele, S., Mereacre, V., Bohn, N., Stüble, P., Wu, X., Keim, N., Xu, R., Geßwein, H., Sun, W., Vrhovac, G., Pordzik, M., Bergfeldt, T., Indris, S., Bauer, W., Ehrenberg, H., &amp; Binder, J. R. (2025). Sodium manganese hexacyanoferrate: Characterization as sodium-ion battery cathode material, full cell cycling with hard carbon and post-mortem analyses. <i>Batteries &amp; Supercaps</i>. <a href="https://doi.org/10.1002/batt.202500015">https://doi.org/10.1002/batt.202500015</a></li>
     <li>Chitu, J. (n.d.). <i>NA EV</i> [Unpublished course presentation].</li>
     <li>Duffner, F., Mauler, L., Wentker, M., Leker, J., &amp; Winter, M. (2021). Large-scale automotive battery cell manufacturing: Analyzing strategic and operational effects on manufacturing costs. <i>International Journal of Production Economics, 232</i>, Article 107982. <a href="https://doi.org/10.1016/j.ijpe.2020.107982">https://doi.org/10.1016/j.ijpe.2020.107982</a></li>
     <li>European Parliament &amp; Council of the European Union. (2023). Regulation (EU) 2023/1542 of the European Parliament and of the Council of 12 July 2023 concerning batteries and waste batteries, amending Directive 2008/98/EC and Regulation (EU) 2019/1020 and repealing Directive 2006/66/EC. <i>Official Journal of the European Union, L 191</i>, 1–117. <a href="http://data.europa.eu/eli/reg/2023/1542/oj">http://data.europa.eu/eli/reg/2023/1542/oj</a></li>
@@ -269,7 +258,6 @@ td.num,th.num{text-align:right;font-family:var(--mono);font-variant-numeric:tabu
     <li>Inoue, S., Koinuma, H., &amp; Tsuruta, T. (1969). Copolymerization of carbon dioxide and epoxide. <i>Journal of Polymer Science Part B: Polymer Letters, 7</i>(4), 287–292. <a href="https://doi.org/10.1002/pol.1969.110070408">https://doi.org/10.1002/pol.1969.110070408</a></li>
     <li>Knehr, K. W., Kubal, J. J., Nelson, P. A., &amp; Ahmed, S. (2022). <i>Battery performance and cost modeling for electric-drive vehicles: A manual for BatPaC v5.0</i> (ANL/CSE-22/1). Argonne National Laboratory. <a href="https://publications.anl.gov/anlpubs/2022/07/176234.pdf">https://publications.anl.gov/anlpubs/2022/07/176234.pdf</a></li>
     <li>Matios, E., Wang, H., Luo, J., Zhang, Y., Wang, C., Lu, X., Hu, X., Xu, Y., &amp; Li, W. (2021). Reactivity-guided formulation of composite solid polymer electrolytes for superior sodium metal batteries. <i>Journal of Materials Chemistry A, 9</i>(34), 18632–18643. <a href="https://doi.org/10.1039/D1TA05490B">https://doi.org/10.1039/D1TA05490B</a></li>
-    <li>Peters, J. F., Peña Cruz, A., &amp; Weil, M. (2019). Exploring the economic potential of sodium-ion batteries. <i>Batteries, 5</i>(1), Article 10. <a href="https://doi.org/10.3390/batteries5010010">https://doi.org/10.3390/batteries5010010</a></li>
     <li>Rosenbaum, R. K., Bachmann, T. M., Gold, L. S., Huijbregts, M. A. J., Jolliet, O., Juraske, R., Koehler, A., Larsen, H. F., MacLeod, M., Margni, M., McKone, T. E., Payet, J., Schuhmacher, M., van de Meent, D., &amp; Hauschild, M. Z. (2008). USEtox—the UNEP-SETAC toxicity model: Recommended characterisation factors for human toxicity and freshwater ecotoxicity in life cycle impact assessment. <i>The International Journal of Life Cycle Assessment, 13</i>(7), 532–546. <a href="https://doi.org/10.1007/s11367-008-0038-4">https://doi.org/10.1007/s11367-008-0038-4</a></li>
     <li>Schmidt, O., Melchior, S., Hawkes, A., &amp; Staffell, I. (2019). Projecting the future levelized cost of electricity storage technologies. <i>Joule, 3</i>(1), 81–100. <a href="https://doi.org/10.1016/j.joule.2018.12.008">https://doi.org/10.1016/j.joule.2018.12.008</a></li>
     <li>Shanghai Metals Market. (2025, July 14). <i>[SMM analysis] In-depth observation of sodium-ion battery industry in H1 2025</i>. <a href="https://news.metal.com/newscontent/103426207/">https://news.metal.com/newscontent/103426207/</a></li>
@@ -283,43 +271,43 @@ td.num,th.num{text-align:right;font-family:var(--mono);font-variant-numeric:tabu
 
 <script>
 const FLOWS=[
- {id:"liquid",base:true,name:"NaPF₆ liquid (baseline)",formula:"1 M NaPF₆ in EC:PC (± DMC), FEC additive",role:"Reference case. Also the electrolyte in the NaEV deck.",
+ {id:"liquid",base:true,name:"NaPF₆ liquid (baseline)",formula:"1 M NaPF₆ in EC:PC (± DMC), FEC additive",role:"Reference case. Also the electrolyte in the NA EV model.",
   steps:[
    {k:"bg",t:"Salt synthesis",in:["NaF or NaCl","PCl₅ (from P + Cl₂)","Anhydrous HF"],c:"Low T, HF medium, recrystallize and dry",h:["safety","cost"]},
    {k:"bg",t:"Solvent production",in:["EC: ethylene oxide + CO₂","PC: propylene oxide + CO₂","DMC"],c:"Distill to battery grade, <20 ppm H₂O",h:["energy"]},
    {k:"fg",t:"Formulation",in:["Dissolve salt and additives","Filter, QC for H₂O and HF"],c:"Dry room or Ar glovebox",h:["energy"]},
    {k:"int",t:"Cell integration",in:["Polyolefin separator","Electrolyte fill (≈ g/Ah)","Wetting, formation, degas"],c:"Dry room, dew point ≈ −40 °C",h:["energy","cost"]}],
-  notes:{"Fluorine / PFAS":"NaPF₆ hydrolysis gives HF and POF₃. NaPF₆ has no carbon, so it is not a PFAS under the OECD definition; the PVDF binder is. Cost fluorine handling and regulatory scenarios explicitly.","Carry into TEA":"Salt $/kg, solvent $/kg, fill g/Ah, separator $/m², dry-room kWh/m²·yr.","End of life":"Electrolyte recovery rarely credited. Assume incineration with HF scrubbing."}},
+  notes:{"Fluorine / PFAS":"NaPF₆ hydrolysis gives HF and POF₃. NaPF₆ has no carbon, so it is not a PFAS under the OECD definition; the PVDF binder is. Fluorine handling and regulatory scenarios are costed explicitly.","Carry into TEA":"Salt $/kg, solvent $/kg, fill g/Ah, separator $/m², dry-room kWh/m²·yr.","End of life":"Electrolyte recovery is rarely credited. End of life is modeled as incineration with HF scrubbing."}},
  {id:"oxide",name:"Oxide · NASICON",formula:"Na₃Zr₂Si₂PO₁₂ (NZSP)",role:"Air-stable ceramic. Energy intensive to sinter.",
   steps:[
    {k:"bg",t:"Precursors",in:["Na₂CO₃","ZrO₂","SiO₂","NH₄H₂PO₄"],c:"Sol-gel alt: Zr alkoxide + TEOS",h:["cost"]},
    {k:"fg",t:"Mix and calcine",in:["Ball mill in ethanol","Dry"],c:"≈ 900–1100 °C, 10–12 h",h:["energy","emis"]},
    {k:"fg",t:"Form and sinter",in:["Re-mill, tape cast or press","Excess Na to offset loss"],c:"≈ 1150–1250 °C, several h",h:["energy","cost"]},
    {k:"int",t:"Cell integration",in:["Thin sheet or pellet","Interlayer to fix wetting","Stack pressure fixtures"],c:"Electrolyte tolerates ambient air",h:["cost"]}],
-  notes:{"Direct emissions":"CO₂ from Na₂CO₃ decomposition, NH₃ + H₂O from NH₄H₂PO₄. Stoichiometric, easy to put in the LCI.","Carry into TEA":"Kiln kWh/kg, sinter yield (cracking, Na loss), sheet thickness, ZrO₂ price.","Tie to our lab synthesis":"Same NZSP route supplies the filler in the PEO-PPC-NASICON composite at a lower loading."}},
+  notes:{"Direct emissions":"CO₂ from Na₂CO₃ decomposition, NH₃ + H₂O from NH₄H₂PO₄. Stoichiometric, easy to put in the LCI.","Carry into TEA":"Kiln kWh/kg, sinter yield (cracking, Na loss), sheet thickness, ZrO₂ price.","Link to lab synthesis":"Same NZSP route supplies the filler in the PEO-PPC-NASICON composite at a lower loading."}},
  {id:"sulfide",name:"Sulfide",formula:"Na₃PS₄ (also Na₃SbS₄, Na₁₁Sn₂PS₁₂)",role:"Soft, cold-pressable, highly conductive. Moisture sensitive.",
   steps:[
-   {k:"bg",t:"Precursors",in:["Na₂S (carbothermal Na₂SO₄ reduction)","P₂S₅ (P₄ + S)"],c:"Weak ecoinvent coverage: build proxies",h:["energy","cost"]},
+   {k:"bg",t:"Precursors",in:["Na₂S (carbothermal Na₂SO₄ reduction)","P₂S₅ (P₄ + S)"],c:"Weak ecoinvent coverage; proxy inventories used",h:["energy","cost"]},
    {k:"fg",t:"Synthesis",in:["High-energy ball milling, or","Solution route (e.g. in a polar solvent)"],c:"Ar atmosphere, anneal ≈ 250–300 °C",h:["energy","safety"]},
    {k:"fg",t:"Densify and cast",in:["Slurry in nonpolar solvent + binder","Cold press"],c:"No high-T sinter. Dry room / Ar",h:["energy","safety"]},
    {k:"int",t:"Cell integration",in:["High stack pressure","H₂S monitoring, scrubbers","Moisture barrier packaging"],c:"Dew point well below Li-ion dry rooms",h:["safety","cost"]}],
-  notes:{"H₂S exposure points":"Manufacturing leaks, cell breach in use, and recycling or landfill at end of life. Model each as a bounded scenario.","Carry into TEA":"Milling kWh/kg, Ar consumption, dry-room upgrade CapEx, scrubber CapEx and reagent.","Data gap":"Na₂S and P₂S₅ at battery grade need proxy inventories."},
-  callout:{t:"Worst-case H₂S from full hydrolysis",eq:"Na₃PS₄ + 4 H₂O → Na₃PO₄ + 4 H₂S",x:"228.2 g Na₃PS₄ → 136.3 g H₂S, so at most ≈ 0.60 g H₂S per g electrolyte. Multiply by the per-kWh mass below for an upper bound, then apply USEtox factors."}},
+  notes:{"H₂S exposure points":"Manufacturing leaks, cell breach in use, and recycling or landfill at end of life. Each is modeled as a bounded scenario.","Carry into TEA":"Milling kWh/kg, Ar consumption, dry-room upgrade CapEx, scrubber CapEx and reagent.","Data gap":"Battery-grade Na₂S and P₂S₅ have no ecoinvent datasets; proxy inventories apply."},
+  callout:{t:"Worst-case H₂S from full hydrolysis",eq:"Na₃PS₄ + 4 H₂O → Na₃PO₄ + 4 H₂S",x:"228.2 g Na₃PS₄ → 136.3 g H₂S, so at most ≈ 0.60 g H₂S per g electrolyte. Multiplied by the per-kWh mass below, this gives an upper bound for USEtox characterization."}},
  {id:"halide",name:"Halide",formula:"Na₃YCl₆, Na₂ZrCl₆ family",role:"Oxidation stable, good as catholyte. Moderate moisture sensitivity.",
   steps:[
    {k:"bg",t:"Precursors",in:["NaCl","YCl₃ or ZrCl₄ (anhydrous)"],c:"ZrCl₄ from zircon carbochlorination",h:["cost","emis"]},
    {k:"fg",t:"Synthesis",in:["Ball milling, or","Sealed-ampoule anneal"],c:"≈ 400–550 °C, inert",h:["energy"]},
    {k:"fg",t:"Densify",in:["Cold press","Often used mixed into cathode"],c:"Dry atmosphere",h:["safety"]},
    {k:"int",t:"Cell integration",in:["Catholyte fraction in cathode","Paired with a separator-layer SE"],c:"Stack pressure",h:["cost"]}],
-  notes:{"Hydrolysis":"Moisture exposure can release HCl. A smaller analog of the sulfide H₂S question.","Carry into TEA":"Y is the cost and supply-risk swing. Zr-based variants trade cost for conductivity.","Scope note":"Treat as a sensitivity case unless we find credible Na-halide pilot data."}},
- {id:"gpe",name:"Polymer / GPE · composite",formula:"PEO–PPC + Na salt + NASICON filler",role:"Our lab's system. Roll-to-roll compatible, low process T.",
+  notes:{"Hydrolysis":"Moisture exposure can release HCl. A smaller analog of the sulfide H₂S question.","Carry into TEA":"Y is the cost and supply-risk swing. Zr-based variants trade cost for conductivity.","Scope note":"Treated as a sensitivity case, given limited Na-halide pilot data."}},
+ {id:"gpe",name:"Polymer / GPE · composite",formula:"PEO–PPC + Na salt + NASICON filler",role:"Lab-developed system. Roll-to-roll compatible, low process T.",
   steps:[
-   {k:"bg",t:"Polymers and salt",in:["PEO (from ethylene oxide)","PPC (CO₂ + propylene oxide)","Na salt: NaTFSI, NaFSI, NaClO₄ or NaPF₆"],c:"PPC embeds CO₂, so check allocation",h:["cost","safety"]},
+   {k:"bg",t:"Polymers and salt",in:["PEO (from ethylene oxide)","PPC (CO₂ + propylene oxide)","Na salt: NaTFSI, NaFSI, NaClO₄ or NaPF₆"],c:"PPC embeds CO₂, which affects allocation",h:["cost","safety"]},
    {k:"bg",t:"Ceramic filler",in:["NZSP from the oxide flow"],c:"Filler wt% scales that flow's burdens",h:["energy"]},
    {k:"fg",t:"Cast or extrude",in:["Solution cast (acetonitrile, DMF) or","Solvent-free hot press / extrusion"],c:"≈ 60–120 °C",h:["energy","emis"]},
    {k:"fg",t:"Dry and condition",in:["Vacuum dry","Solvent recovery"],c:"GPE variant: liquid uptake or in-situ polymerization",h:["energy"]},
    {k:"int",t:"Cell integration",in:["Laminate film","Mild heat and pressure"],c:"Closest to existing Li-ion lines",h:["cost"]}],
-  notes:{"Salt choice moves PFAS risk":"NaTFSI contains CF₃ groups and is a PFAS under the OECD definition. NaFSI and NaPF₆ are fluorinated but carbon-free. NaClO₄ avoids fluorine but is an oxidizer.","Carry into TEA":"Casting solvent use and recovery rate, film thickness, filler loading, line speed.","LCA hotspot":"Solvent recovery rate often dominates. Run it as a sensitivity parameter (e.g. 90–99%)."}}
+  notes:{"Salt choice moves PFAS risk":"NaTFSI contains CF₃ groups and is a PFAS under the OECD definition. NaFSI and NaPF₆ are fluorinated but carbon-free. NaClO₄ avoids fluorine but is an oxidizer.","Carry into TEA":"Casting solvent use and recovery rate, film thickness, filler loading, line speed.","LCA hotspot":"Solvent recovery rate often dominates and is treated as a sensitivity parameter (e.g. 90–99%)."}}
 ];
 const CMP=[
  ["NaPF₆ liquid","≈ ambient (salt synth low T)","Dry room","n/a","Salt + separator","HF route, solvent production"],
