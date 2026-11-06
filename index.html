@@ -4,21 +4,19 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Na-ion Electrolyte Process Flows</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter+Tight:wght@700&family=Roboto+Condensed:wght@400;500;600;700&display=swap">
 <style>
 :root{
-  --bg:#e4e6ea; --surface:#ffffff; --ink:#1b2230; --muted:#5b6475; --line:#d9dde5;
+  --bg:#e3f1e5; --surface:#ffffff; --ink:#1b2230; --muted:#5b6475; --line:#d9dde5;
   --na:#e8a317; --na-soft:#fbefd2; --na-ink:#7a5100;
   --bg-step:#eef1f6; --fg-step:#fff8e8; --int-step:#eaf3ef;
   --bg-edge:#8391a8; --fg-edge:#e8a317; --int-edge:#3f8f6e;
   --energy:#b3541e; --emis:#6c4bb4; --cost:#1f6fb2; --safety:#c0392b;
-  --serif:"Inter Tight",system-ui,-apple-system,"Segoe UI",sans-serif; --sans:"Roboto Condensed","Arial Narrow",system-ui,sans-serif; --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  --serif:Aptos,"Aptos Display","Segoe UI",system-ui,-apple-system,sans-serif; --sans:Aptos,"Segoe UI",system-ui,-apple-system,sans-serif; --mono:Aptos,"Aptos Mono","Segoe UI",system-ui,sans-serif;
 }
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
     color-scheme:dark;
-    --bg:#12161d; --surface:#1a1f29; --ink:#e7eaf0; --muted:#9aa3b4; --line:#2e3542;
+    --bg:#14221a; --surface:#1a1f29; --ink:#e7eaf0; --muted:#9aa3b4; --line:#2e3542;
     --na:#f0b43a; --na-soft:#3a2e14; --na-ink:#f7cf7c;
     --bg-step:#1f2531; --fg-step:#2a2416; --int-step:#172a23;
     --bg-edge:#6d7a91; --fg-edge:#f0b43a; --int-edge:#58b08b;
@@ -27,7 +25,7 @@
 }
 :root[data-theme="dark"]{
   color-scheme:dark;
-  --bg:#12161d; --surface:#1a1f29; --ink:#e7eaf0; --muted:#9aa3b4; --line:#2e3542;
+  --bg:#14221a; --surface:#1a1f29; --ink:#e7eaf0; --muted:#9aa3b4; --line:#2e3542;
   --na:#f0b43a; --na-soft:#3a2e14; --na-ink:#f7cf7c;
   --bg-step:#1f2531; --fg-step:#2a2416; --int-step:#172a23;
   --bg-edge:#6d7a91; --fg-edge:#f0b43a; --int-edge:#58b08b;
